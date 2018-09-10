@@ -13,7 +13,7 @@
   "author": "Gordon Martin",
   "license": "MIT",
   "dependencies": {
-    "ssb-bluetooth-manager": "^1.0.0"
+    "ssb-bluetooth-manager": "^1.0.1"
   },
   "devDependencies": {
     "scuttlebot": "^11.4.4",

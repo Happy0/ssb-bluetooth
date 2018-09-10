@@ -9,7 +9,7 @@ var BluetoothPlugin = require('../index');
 const makeNoauthPlugin = require('multiserver/plugins/noauth');
 
 const writablePath = path.join('/home/happy0/', '');
-const ssbPath = path.resolve(writablePath, '.bluetooth-ssb-test');
+const ssbPath = path.resolve(writablePath, '.ssb');
 
 var manifestFile = path.join(ssbPath, '/manifest.json')
 

@@ -13,7 +13,7 @@
   "author": "Gordon Martin",
   "license": "MIT",
   "dependencies": {
-    "ssb-bluetooth-manager": "^1.0.1",
+    "ssb-bluetooth-manager": "^1.0.2",
     "multiserver-bluetooth": "1.0.0"
   },
   "devDependencies": {

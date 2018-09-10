@@ -1,6 +1,6 @@
 {
   "name": "ssb-bluetooth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A scuttlebot plugin for syncing over bluetooth serial connections on Linux, windows and mac",
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,9 @@
     "ssb-bluetooth-manager": "^1.0.1"
   },
   "devDependencies": {
-    "scuttlebot": "^11.4.4",
     "multiserver": "ssbc/multiserver#166b7c8af4147251b7d4660934ea14ed632ea025",
-    "multiserver-bluetooth": "happy0/multiserver-bluetooth#9d2d8da8a1445ea8e2c0aba6b5a5cd685ff464f2",
+    "multiserver-bluetooth": "github:happy0/multiserver-bluetooth#9d2d8da8a1445ea8e2c0aba6b5a5cd685ff464f2",
+    "scuttlebot": "^11.4.4",
     "secret-stack": "ssbc/secret-stack#363375e672167ee47434a87cb9a3283452d3ce53",
     "ssb-config": "ssbc/ssb-config#3c2e1e457fd82d6b1004e991d49e99321294ada0",
     "ssb-keys": "7.0.16"

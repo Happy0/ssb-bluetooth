@@ -1,6 +1,6 @@
 {
   "name": "ssb-bluetooth",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A scuttlebot plugin for syncing over bluetooth serial connections on Linux, windows and mac",
   "main": "index.js",
   "scripts": {

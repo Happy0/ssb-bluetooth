@@ -30,6 +30,7 @@ config.connections = {
     net: [{ port: 8008, scope: "private", "transform": "shs" }]
   },
   outgoing: {
+    bluetooth: [{scope: 'public', transform: 'noauth'}],
   },
 };
 
@@ -62,3 +63,10 @@ var server = require('scuttlebot/index')
   .call(null, config);
 
 fs.writeFileSync(manifestFile, JSON.stringify(server.getManifest(), null, 2))
+
+console.log(server);
+
+//console.log("Going to try to connect...")
+//server.connect("bt:<bluetooth address>", (err, res) => {
+//  console.log("Connection err: " + err);
+//})

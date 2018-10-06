@@ -1,59 +1,46 @@
-const makeMultiservPlugin = require('multiserver-bluetooth');
+const bluetoothMsPlugin = require('multiserver-bluetooth');
 
-/**
- * A plugin for bluetooth functionality. Initialises a multiserve plugin
- * for managing connections, and exposes some mux-rpc functions for bluetooth
- * functionality (such as scanning for nearby devices, making your device discoverable)
- * 
- * @param {*} bluetoothManager an instance of a bluetooth manager that implements the platform
- *                             specific (e.g. android or PC) bluetooth functionality.
- */
 module.exports = (bluetoothManager) => {
 
-    function initMultiservePlugin(stack) {
-      const plugin = {
-        name: 'bluetooth',
-        create: () => {
-          return makeMultiservPlugin({
-            bluetoothManager: bluetoothManager
-          })
-        }
+  function initMultiservPlugin(stack) {
+    stack.multiserver.transport({
+      name: 'bluetooth',
+      create: () => bluetoothMsPlugin({bluetoothManager: bluetoothManager}),
+    });
+  }
+
+  return {
+    name: "bluetoothController",
+    version: "1.0.0",
+    init: (stack) => {
+
+      initMultiservPlugin(stack);
+
+      return {
+        refreshNearbyDevices: (cb) => {
+
+          bluetoothManager.refreshNearbyDevices();
+
+          // TODO: error handling
+          cb(null, true);
+        },
+        nearbyDevices: (cb) => {
+          return bluetoothManager.nearbyDevices();
+        },
+        makeDeviceDiscoverable: (forTime, cb) => {
+          bluetoothManager.makeDeviceDiscoverable(forTime);
+
+          // TODO: error handling
+          cb(null, true);
+        },
+
       }
-    
-      stack.multiserver.transport(plugin);
+    },
+    manifest: {
+      "refreshNearbyDevices": "async",
+      "nearbyDevices": "source",
+      "makeDeviceDiscoverable": "async"
     }
 
-    return {
-      name: "bluetooth",
-      version: "1.0.0",
-      init: (stack) => {
-        initMultiservePlugin(stack);
-
-        return {
-          refreshNearbyDevices: (cb) => {
-
-            bluetoothManager.refreshNearbyDevices();
-
-            // TODO: error handling
-            cb(null, true);
-          },
-          nearbyDevices: (cb) => {
-            return bluetoothManager.nearbyDevices();
-          },
-          makeDeviceDiscoverable: (forTime, cb) => {
-            bluetoothManager.makeDeviceDiscoverable(forTime);
-
-            // TODO: error handling
-            cb(null, true);
-          },
-
-        }
-      },
-      manifest: {
-        "refreshNearbyDevices": "async",
-        "nearbyDevices": "source",
-        "makeDeviceDiscoverable": "async"
-      }
-
-    }
+  }
 }

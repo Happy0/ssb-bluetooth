@@ -13,15 +13,10 @@
   "author": "Gordon Martin",
   "license": "MIT",
   "dependencies": {
-    "multiserver-bluetooth": "1.0.1",
-    "pull-pushable": "^2.2.0"
+    "multiserver-bluetooth": "1.0.2"
   },
   "devDependencies": {
-    "multiserver": "ssbc/multiserver#166b7c8af4147251b7d4660934ea14ed632ea025",
-    "scuttlebot": "^12.0.1",
-    "secret-stack": "ssbc/secret-stack#363375e672167ee47434a87cb9a3283452d3ce53",
-    "ssb-config": "ssbc/ssb-config#3c2e1e457fd82d6b1004e991d49e99321294ada0",
-    "ssb-keys": "7.0.16",
+    "scuttlebot": "12.0.1",
     "ssb-bluetooth-manager": "1.0.4"
   }
 }

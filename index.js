@@ -24,7 +24,7 @@ module.exports = (bluetoothManager) => {
           // TODO: error handling
           cb(null, true);
         },
-        nearbyDevices: (cb) => {
+        nearbyDevices: () => {
           return bluetoothManager.nearbyDevices();
         },
         makeDeviceDiscoverable: (forTime, cb) => {

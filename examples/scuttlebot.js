@@ -5,7 +5,8 @@ const mkdirp = require('mkdirp');
 var ssbKeys = require('ssb-keys');
 var manifest = require('./manifest');
 
-var BluetoothPlugin = require('../index');
+var bluetoothManager = require('ssb-bluetooth-manager')();
+var BluetoothPlugin = require('../index')(bluetoothManager);
 const makeNoauthPlugin = require('multiserver/plugins/noauth');
 
 const writablePath = path.join('/home/happy0/', '');

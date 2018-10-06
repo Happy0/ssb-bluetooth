@@ -1,21 +1,59 @@
-const makeBluetoothPlugin = require('multiserver-bluetooth');
-const BluetoothManager = require('ssb-bluetooth-manager');
+const makeMultiservPlugin = require('multiserver-bluetooth');
 
 /**
- * A scuttlebot plugin for handling bluetooth connections
+ * A plugin for bluetooth functionality. Initialises a multiserve plugin
+ * for managing connections, and exposes some mux-rpc functions for bluetooth
+ * functionality (such as scanning for nearby devices, making your device discoverable)
+ * 
+ * @param {*} bluetoothManager an instance of a bluetooth manager that implements the platform
+ *                             specific (e.g. android or PC) bluetooth functionality.
  */
-module.exports = function bluetoothTransportPlugin(stack) {
+module.exports = (bluetoothManager) => {
 
-  const bluetoothManager = BluetoothManager();
-
-  const plugin = {
-    name: 'bluetooth',
-    create: () => {
-      return makeBluetoothPlugin({
-        bluetoothManager: bluetoothManager
-      })
+    function initMultiservePlugin(stack) {
+      const plugin = {
+        name: 'bluetooth',
+        create: () => {
+          return makeMultiservPlugin({
+            bluetoothManager: bluetoothManager
+          })
+        }
+      }
+    
+      stack.multiserver.transport(plugin);
     }
-  }
 
-  stack.multiserver.transport(plugin);
+    return {
+      name: "bluetooth",
+      version: "1.0.0",
+      init: (stack) => {
+        initMultiservePlugin(stack);
+
+        return {
+          refreshNearbyDevices: (cb) => {
+
+            bluetoothManager.refreshNearbyDevices();
+
+            // TODO: error handling
+            cb(null, true);
+          },
+          nearbyDevices: (cb) => {
+            return bluetoothManager.nearbyDevices();
+          },
+          makeDeviceDiscoverable: (forTime, cb) => {
+            bluetoothManager.makeDeviceDiscoverable(forTime);
+
+            // TODO: error handling
+            cb(null, true);
+          },
+
+        }
+      },
+      manifest: {
+        "refreshNearbyDevices": "async",
+        "nearbyDevices": "source",
+        "makeDeviceDiscoverable": "async"
+      }
+
+    }
 }

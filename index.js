@@ -34,10 +34,7 @@ module.exports = (bluetoothManager) => {
             return bluetoothManager.nearbyDevices(refreshInterval);
           },
           makeDeviceDiscoverable: (forTime, cb) => {
-            bluetoothManager.makeDeviceDiscoverable(forTime);
-
-            // TODO: error handling
-            cb(null, true);
+            bluetoothManager.makeDeviceDiscoverable(forTime, cb);
           },
 
         }

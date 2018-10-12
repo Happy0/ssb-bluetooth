@@ -30,19 +30,22 @@ module.exports = (bluetoothManager) => {
         initMultiservePlugin(stack);
 
         return {
-          nearbyDevices: (refreshInterval, cb) => {
+          nearbyDevices: (refreshInterval) => {
             return bluetoothManager.nearbyDevices(refreshInterval);
           },
           makeDeviceDiscoverable: (forTime, cb) => {
             bluetoothManager.makeDeviceDiscoverable(forTime, cb);
           },
+          isEnabled: (cb) => {
+            bluetoothManager.isEnabled(cb);
+          }
 
         }
       },
       manifest: {
-        "refreshNearbyDevices": "async",
         "nearbyDevices": "source",
-        "makeDeviceDiscoverable": "async"
+        "makeDeviceDiscoverable": "async",
+        "isEnabled": "async"
       }
 
     }

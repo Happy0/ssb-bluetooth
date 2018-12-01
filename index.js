@@ -11,16 +11,31 @@ const makeMultiservPlugin = require('multiserver-bluetooth');
 module.exports = (bluetoothManager) => {
 
     function initMultiservePlugin(stack) {
-      const plugin = {
-        name: 'bluetooth',
-        create: () => {
-          return makeMultiservPlugin({
-            bluetoothManager: bluetoothManager
-          })
-        }
-      }
+
+      bluetoothManager.getOwnMacAddress((err, ownAddress) => {
+
+        if (err) {
+          console.log("Error while trying to get own bluetooth mac address: ");
+          console.log(err);
+          return;
+        } else {
+          console.log("Own bluetooth mac address is: " + ownAddress);
+
+          const plugin = {
+            name: 'bluetooth',
+            create: () => {
     
-      stack.multiserver.transport(plugin);
+              return makeMultiservPlugin({
+                bluetoothManager: bluetoothManager,
+                macAddress: ownAddress
+              })
+            }
+          }
+  
+          stack.multiserver.transport(plugin);
+        }
+      });
+    
     }
 
     return {
@@ -38,6 +53,9 @@ module.exports = (bluetoothManager) => {
           },
           isEnabled: (cb) => {
             bluetoothManager.isEnabled(cb);
+          },
+          getOwnMacAddress: (cb) => {
+            bluetoothManager.getOwnMacAddress(cb);
           }
 
         }
@@ -45,7 +63,8 @@ module.exports = (bluetoothManager) => {
       manifest: {
         "nearbyDevices": "source",
         "makeDeviceDiscoverable": "async",
-        "isEnabled": "async"
+        "isEnabled": "async",
+        "getOwnMacAddress": "async"
       }
 
     }

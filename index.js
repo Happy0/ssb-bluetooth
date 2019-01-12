@@ -38,6 +38,9 @@ module.exports = (bluetoothManager) => {
           },
           isEnabled: (cb) => {
             bluetoothManager.isEnabled(cb);
+          },
+          getMetadataForDevice: (deviceAddress, cb) => {
+            bluetoothManager.getMetadataForDevice(deviceAddress, cb);
           }
 
         }
@@ -45,7 +48,8 @@ module.exports = (bluetoothManager) => {
       manifest: {
         "nearbyDevices": "source",
         "makeDeviceDiscoverable": "async",
-        "isEnabled": "async"
+        "isEnabled": "async",
+        "getMetadataForDevice": "async"
       }
 
     }

@@ -36,6 +36,9 @@ module.exports = (bluetoothManager) => {
           nearbyScuttlebuttDevices: (refreshInterval) => {
             return bluetoothManager.nearbyScuttlebuttDevices(refreshInterval);
           },
+          bluetoothScanState: () => {
+            return bluetoothManager.bluetoothScanState();
+          },
           makeDeviceDiscoverable: (forTime, cb) => {
             bluetoothManager.makeDeviceDiscoverable(forTime, cb);
           },
@@ -51,6 +54,7 @@ module.exports = (bluetoothManager) => {
       manifest: {
         "nearbyDevices": "source",
         "nearbyScuttlebuttDevices": "source",
+        "bluetoothScanState": "source",
         "makeDeviceDiscoverable": "async",
         "isEnabled": "async",
         "getMetadataForDevice": "async"

@@ -7,15 +7,17 @@ const makeMultiservPlugin = require('multiserver-bluetooth');
  * 
  * @param {*} bluetoothManager an instance of a bluetooth manager that implements the platform
  *                             specific (e.g. android or PC) bluetooth functionality.
+ *                             See ssb-mobile-bluetooth-manager for an example.
  */
-module.exports = (bluetoothManager) => {
+module.exports = (bluetoothManager, opts) => {
 
     function initMultiservePlugin(stack) {
       const plugin = {
         name: 'bluetooth',
         create: () => {
           return makeMultiservPlugin({
-            bluetoothManager: bluetoothManager
+            bluetoothManager: bluetoothManager,
+            scope: opts ? opts.scope : null
           })
         }
       }
